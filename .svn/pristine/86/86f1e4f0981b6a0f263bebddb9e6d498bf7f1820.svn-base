@@ -1,0 +1,40 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#define fsUser @"flatsalesftp@sz.hwpg.net"
+
+
+#define fontIdentier @"settingFont"
+
+//#define screenWidth self.view.frame.size.width
+//#define screenHeight self.view.frame.size.height
+
+#define navBarWidth self.view.frame.size.width
+#define navBarHeight (44+[UIApplication sharedApplication].statusBarFrame.size.height)
+
+#define httpDelegate @"http"
+#define charUrl @"http://210.3.22.118:3000"
+#define socketIp @"210.3.22.118"
+
+//#define charUrl @"https://172.21.111.108:3000"
+//#define socketIp @"172.21.111.108"
+//#define httpDelegate @"https"
+//#define charUrl @"https://mobile.hwpg.com:3000"
+//#define socketIp @"mobile.hwpg.com"
+
+
+#define socketPort 3000
+#define versionNo @"2015061201"
+#define chatSystemUserName @"system"
+#define kGetColorAl(r, g, b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+#define kGetColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define screenHeight [UIScreen mainScreen].bounds.size.height
+#define screenWidth [UIScreen mainScreen].bounds.size.width
+#import <Availability.h>
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif

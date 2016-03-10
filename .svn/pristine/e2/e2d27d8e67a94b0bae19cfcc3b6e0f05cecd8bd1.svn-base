@@ -1,0 +1,370 @@
+//
+//  ZFYSubscribeView.m
+//  HPGApp
+//
+//  Created by hwpl on 15/11/12.
+//  Copyright © 2015年 hwpl hwpl. All rights reserved.
+//
+
+
+#import "ZFYSubscribeView.h"
+#import "JSON.h"
+#import "UIImageView+WebCache.h"
+#define footHeight 20
+#define gap 8
+//#define imageHeight 150
+@interface ZFYSubscribeView()
+{
+    UIView *lineView;
+}
+
+@property(nonatomic,retain) UILabel *titleLable;
+@property(nonatomic,retain) UILabel *timeLable;
+@property(nonatomic,copy) UITextView *contentLable;
+@property(nonatomic,retain) UIImageView *imageView;
+@property(nonatomic,retain) UIView *footView;
+@property(nonatomic,retain) UILabel *viewAll;
+@property(nonatomic,retain) id<XHMessageModel> messageInfo;
+@end
+
+@implementation ZFYSubscribeView
+@synthesize titleLable,timeLable,contentLable,imageView;
+@synthesize footView,viewAll;
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    if (self =[super initWithFrame:frame] ) {
+        
+        //self.scrollEnabled=NO;
+        
+        
+        
+        titleLable = [[UILabel alloc] initWithFrame:CGRectZero];
+        [titleLable setFont:[UIFont systemFontOfSize:14]];
+        [titleLable setLineBreakMode:NSLineBreakByWordWrapping];
+        [titleLable setNumberOfLines:999];
+        [self addSubview:titleLable];
+        
+        timeLable = [[UILabel alloc] initWithFrame:CGRectZero];
+        [timeLable setFont:[UIFont systemFontOfSize:10]];
+        [timeLable setTextColor:kGetColorAl(0, 0, 0, 0.53)];
+        [self addSubview:timeLable];
+        
+        contentLable = [[UITextView alloc] initWithFrame:CGRectZero];
+        contentLable.editable=NO;
+        contentLable.scrollEnabled=NO;
+        contentLable.contentInset = UIEdgeInsetsMake(0, 0.0, 0, 0.0);
+        [contentLable setFont:[UIFont systemFontOfSize:12]];
+        [contentLable setTextAlignment:NSTextAlignmentLeft];
+        [contentLable setTextColor:kGetColorAl(0, 0, 0, 0.53)];
+        [self addSubview:contentLable];
+        
+        imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        [imageView setContentMode:UIViewContentModeScaleToFill];
+        [self addSubview:imageView];
+        
+        footView = [[UIView alloc] initWithFrame:CGRectZero];
+        lineView = [[UIView alloc] initWithFrame:CGRectMake(5, 5, [[UIScreen mainScreen] bounds].size.width*(0.9)-10, 1)];
+        [lineView setBackgroundColor:[UIColor colorWithRed:245.0/255 green:245.0/255 blue:2245.0/255 alpha:1]];
+        [footView addSubview:lineView];
+        [self addSubview:footView];
+        
+    }
+    return  self;
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+-(void)clearFrame
+{
+    [titleLable setFrame:CGRectZero];
+    [timeLable setFrame:CGRectZero];
+    [contentLable setFrame:CGRectZero];
+    [imageView setFrame:CGRectZero];
+    titleLable.text=nil;
+    contentLable.text=nil;
+    timeLable.text=nil;
+    imageView.image=nil;
+    
+}
+-(void)setMessage:(id<XHMessageModel>)message
+{
+     // _messageInfo = message;
+    
+    @try {
+        [self clearFrame];
+        [self setBackgroundColor:[UIColor whiteColor]];
+        [self.layer setBorderWidth:1];
+        [self.layer setBorderColor:[UIColor colorWithRed:(230.0/255) green:(230.0/255) blue:(250.0/255) alpha:1].CGColor];
+        [self.layer setCornerRadius:4];
+  
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width*0.9;
+    //计算高度
+    CGFloat height = 0;
+    
+    NSMutableDictionary *messageDic = message.messageDic;
+    NSString *title = [messageDic objectForKey:@"TITIL"];
+    NSString *content = [messageDic objectForKey:@"CONTENT"];
+    NSString *date =[messageDic objectForKey:@"ENDDATE"];
+    NSString *linkUlr = [messageDic objectForKey:@"LINKURL"];
+    NSString *imageUrl = [messageDic objectForKey:@"IMAGEURL"];
+    if (title == nil) {
+        title=@"null";
+    }
+    if (content == nil) {
+        content =@"null";
+    }
+    
+    if (date ==nil) {
+         date = @"11月12日";
+    }
+    
+    CGSize titleSize = [title textSizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(width-gap*2, 200) lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize contentSize = [content textSizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(width-gap*2, 2000) lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize dateSize = [date textSizeWithFont:[UIFont systemFontOfSize:10] constrainedToSize:CGSizeMake(width-gap*2, 2000) lineBreakMode:NSLineBreakByWordWrapping];
+    
+      
+        
+    [titleLable setFrame:CGRectMake(gap*2, gap, width-gap*2, titleSize.height+gap)];
+    height +=titleSize.height+gap;
+    
+    [timeLable setFrame:CGRectMake(gap*2, height+gap/2, width-gap*2, dateSize.height+gap)];
+    height +=dateSize.height+gap/2;
+    
+    [contentLable setFrame:CGRectMake(gap, height+gap, width-gap*2, 15+contentSize.height+gap)];
+    
+        height +=15+contentSize.height+gap;
+        
+        titleLable.text = title;
+        contentLable.text  = content;
+        timeLable.text = date;
+        if (imageUrl !=nil) {
+            
+            CGFloat imageHeight =(width-2*gap)*5/9;
+            [imageView setFrame:CGRectMake(gap, height, width-2*gap, imageHeight)];
+            [imageView setBackgroundColor:[UIColor grayColor]];
+            height = height+5+imageHeight;
+            [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+            imageView.hidden=NO;
+        }else
+        {
+            imageView.hidden=YES;
+        }
+        if (linkUlr !=nil && ![linkUlr isKindOfClass:[NSNull class]]) {
+           
+            
+            viewAll = [[UILabel alloc] initWithFrame:CGRectMake(gap, 12, width/2, footHeight-3)];
+            [viewAll setFont:[UIFont systemFontOfSize:15]];
+            viewAll.text=@"查看全文";
+            [footView addSubview:viewAll];
+            [footView setFrame:CGRectMake(gap, height, width, footHeight)];
+            footView.hidden=NO;
+            lineView.hidden=NO;
+            
+            [self setFrame:CGRectMake(0, 0, width, height+2*gap)];
+            
+           
+        }else
+        {
+             CGRect TEST = imageView.frame;
+                lineView.hidden=YES;
+                footView.hidden=YES;
+                [self setFrame:CGRectMake(0, 0, width, height+gap)];
+            
+        }
+        
+        
+    
+    }
+    @catch (NSException *exception) {
+       
+    }
+  
+}
+
+-(void)dealloc
+{
+    titleLable = nil;
+    timeLable = nil;
+    contentLable=nil;
+    //imageView=nil;
+    footView = nil;
+    viewAll = nil;
+    
+}
+
+-(void)clearAll
+{
+//    [titleLable removeFromSuperview];
+//    [titleLable removeFromSuperview];
+//    [contentLable removeFromSuperview];
+//    [footView removeFromSuperview];
+//    [viewAll removeFromSuperview];
+    titleLable.text = nil;
+    timeLable.text = nil;
+    contentLable.text=nil;
+    //imageView=nil;
+
+    viewAll.text = nil;
+}
+
++(CGFloat)getViewHeight:(id <XHMessageModel> )message
+{
+    @try {
+        CGFloat width = [[UIScreen mainScreen] bounds].size.width*0.9;
+    //计算高度
+    CGFloat height = 0;
+    
+    NSMutableDictionary *messageDic = message.messageDic;
+        NSString *title = [messageDic objectForKey:@"TITIL"];
+        NSString *content = [messageDic objectForKey:@"CONTENT"];
+        NSString *date =[messageDic objectForKey:@"ENDDATE"];
+        NSString *linkUlr = [messageDic objectForKey:@"LINKURL"];
+    NSString *imageUrl = [messageDic objectForKey:@"IMAGEURL"];
+    if (title == nil) {
+        title=@"null";
+    }
+    if (content == nil) {
+        content =@"null";
+    }
+    
+    if (date ==nil) {
+        date = @"11月19日";
+    }
+
+    
+    CGSize titleSize = [title textSizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(width-gap*2, 200) lineBreakMode:NSLineBreakByWordWrapping];
+    height +=titleSize.height+gap;
+    CGSize contentSize = [content textSizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(width-gap*2, 2000) lineBreakMode:NSLineBreakByWordWrapping];
+     height +=contentSize.height+gap;
+    CGSize dateSize = [date textSizeWithFont:[UIFont systemFontOfSize:10] constrainedToSize:CGSizeMake(width-gap*2, 2000) lineBreakMode:NSLineBreakByWordWrapping];
+        if (imageUrl !=nil) {
+             CGFloat imageHeight =(width-2*gap)*5/9;
+            height = height+5+imageHeight;
+        }
+    if (linkUlr !=nil && ![linkUlr isKindOfClass:[NSNull class]]) {
+        height +=15+dateSize.height+gap;
+        return height+gap+footHeight;
+    }else
+    {
+        height +=15+dateSize.height;
+      return height;
+    }
+    
+        
+        
+    }
+    @catch (NSException *exception) {
+        return 50;
+    }
+    
+
+}
+
+
+//售楼格式解析
++(NSString *)getFlatSaleMessage:(NSMutableDictionary *)messgeDic
+{
+    @try {
+        
+        
+            if (messgeDic == nil) {
+                return  nil;
+            }
+            NSString *type = [messgeDic objectForKey:@"TYPE"];
+            if (type && ![@"" isEqualToString:type] && ![type isKindOfClass:[NSNull class]] ) {
+                                NSDictionary *jsonResult = [[messgeDic objectForKey:@"JSONRESULT"] JSONValue];
+                                if (jsonResult && ![jsonResult isKindOfClass:[NSNull class]]) {
+                
+                                    return  [self handleFlatSaleTypeMsg:jsonResult type:type withAllMessage: messgeDic];
+                                }else
+                                {
+                                    NSString *content = [messgeDic objectForKey:@"CONTENT"];
+                                    if (content !=nil) {
+                                        return content;
+                                    }else
+                                    {
+                                    return @"";
+                                    }
+                                }
+            }else
+            {
+                return @"";
+            }
+        
+        
+    }
+    @catch (NSException *exception) {
+        return [exception description];
+    }
+    
+}
++(NSString *)handleFlatSaleTypeMsg:(NSDictionary *)rsDic type:(NSString *)type withAllMessage:(NSDictionary *) allDic
+{
+    NSString *msg = nil;
+    
+    if ([@"new_sale" isEqualToString:type]) {
+
+        NSString *unit =[rsDic objectForKey:@"unit"];
+        NSString *listPrice =[rsDic objectForKey:@"listPrice"];
+        NSString *salePrice =[rsDic objectForKey:@"salePrice"];
+        NSString *priceOne =[rsDic objectForKey:@"priceOne"];
+        NSString *seller =[rsDic objectForKey:@"seller"];
+        msg = [NSString stringWithFormat:@"单位: %@ \n定价: %@ \n售价: %@ \n批核价: %@ \n销售员: %@ \n",unit,listPrice,salePrice,priceOne,seller];
+    }else if([@"sign_contract" isEqualToString:type])
+    {
+        NSString *project = [rsDic objectForKey:@"project"];
+        NSString *unit =[rsDic objectForKey:@"unit"];
+        NSString *listPrice =[rsDic objectForKey:@"listPrice"];
+        NSString *salePrice =[rsDic objectForKey:@"salePrice"];
+        NSString *priceOne =[rsDic objectForKey:@"priceOne"];
+        NSString *seller =[rsDic objectForKey:@"seller"];
+        NSString *opDttm =[rsDic objectForKey:@"opdttm"];
+        NSString *contrNo =[rsDic objectForKey:@"contrNo"];
+        msg = [NSString stringWithFormat:@"%@ \n单位: %@\n定价: %@\n售价: %@\n批核价: %@\n合同号: %@\n签约时间: %@\n销售员: %@",project,unit,listPrice,salePrice,priceOne,contrNo, opDttm,seller];
+    }else if([@"change_product" isEqualToString:type])
+    {
+        NSString *project = [rsDic objectForKey:@"project"];
+        NSString *unit =[rsDic objectForKey:@"unit"];
+        NSString *salePrice =[rsDic objectForKey:@"salePrice"];
+        NSString *cancelReson =[rsDic objectForKey:@"cancelReson"];
+        NSString *opDttm =[rsDic objectForKey:@"opdttm"];
+        NSString *seller =[rsDic objectForKey:@"seller"];
+        msg = [NSString stringWithFormat:@"%@ \n单位: %@\n售价: %@\n原因: %@\n时间: %@\n销售员: %@",project,unit,salePrice,cancelReson, opDttm,seller];
+    }else if([@"online_search" isEqualToString:type])
+    {
+        NSArray *arr = (NSArray *)rsDic;
+        
+    
+        NSString *searchCondition = [allDic objectForKey:@"SEARCHCONDITION"];
+        NSString *endDate =[allDic objectForKey:@"ENDDATE"];
+
+        msg = [NSString stringWithFormat:@"截止到 : %@ \n查询条件 : %@ \n\n",endDate,searchCondition];
+        for (int i=0;i< arr.count; i++) {
+            NSDictionary *rsdic = [arr objectAtIndex:i];
+            NSString *category = [rsdic objectForKey:@"category"];
+            NSString *mscnt = [rsdic objectForKey:@"mscnt"];
+            NSString *msgfa = [rsdic objectForKey:@"msgfa"];
+            NSString *mssp = [rsdic objectForKey:@"mssp"];
+            NSString *_tmsg =[NSString stringWithFormat:@"%@ : %@套 \n销售价格: %@元 \n建筑面积 :%@ 平方米 \n \n",category,mscnt,mssp,msgfa];
+            if (i==(arr.count-1)) {
+                _tmsg =[NSString stringWithFormat:@"%@ : %@套 \n销售价格: %@元 \n建筑面积 :%@ 平方米",category,mscnt,mssp,msgfa];
+            }
+            if (msg !=nil) {
+                msg = [msg stringByAppendingString:_tmsg];
+            }else
+            {
+                msg = _tmsg;
+            }
+            
+        }
+    }
+    return  msg;
+}
+
+
+@end

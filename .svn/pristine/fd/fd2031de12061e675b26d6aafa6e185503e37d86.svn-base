@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BC2E0A19-ADC1-4C09-ADF7-44BE7A96FDAB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HwpgMobile</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7be702fb-69b5-c949-8c51-82048c6310a6</key>
+		<string>http://ivan.zou@172.21.108.153:8001/svn/HWPG_Mobile</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HwpgMobile.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7be702fb-69b5-c949-8c51-82048c6310a6</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7be702fb-69b5-c949-8c51-82048c6310a6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7be702fb-69b5-c949-8c51-82048c6310a6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HWPG_Mobile</string>
+		</dict>
+	</array>
+</dict>
+</plist>

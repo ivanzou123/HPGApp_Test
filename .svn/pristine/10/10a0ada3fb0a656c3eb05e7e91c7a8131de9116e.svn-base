@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[XHMessageBubbleView layoutSubviews]:XHMessageBubbleView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CommUtilHelper getCommonName]:CommUtilHelper.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[XHDisplayMediaViewController setMessage:]:XHDisplayMediaViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[LoginViewController initNav]:LoginViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "contactView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[XHMessageBubbleView bubbleFrame]:XHMessageBubbleView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CommUtilHelper GetNativeUserInfo]:CommUtilHelper.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ChatMessageViewController viewDidLoad]:ChatMessageViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "emotion.emotionPath">
+            </PersistentString>
+            <PersistentString
+               value = "emotion.emotionConverPhoto">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__51-[AddContactUserViewController saveThreadCallBack:]_block_invoke:AddContactUserViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

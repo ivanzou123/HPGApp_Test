@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "aa77040e-93a6-3a42-a080-ea73886c12c3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "aa77040e-93a6-3a42-a080-ea73886c12c3" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "aa77040e-93a6-3a42-a080-ea73886c12c3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3B8161D2-EA3C-4F22-BE80-E9EA0DDF3646",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "aa77040e-93a6-3a42-a080-ea73886c12c3" : "HPGApp_Test\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "HPGApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HPGApp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/172.21.108.153:8001\/svn\/HPGApp_Test",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "aa77040e-93a6-3a42-a080-ea73886c12c3"
+    }
+  ]
+}
